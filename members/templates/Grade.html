@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade_work</title>
+    <link rel="stylesheet" href="{% static 'styles/first.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+</head>
+
+<body class="p-3 mb-2 bg-secondary text-white">
+
+    <center>
+        <h1 class="text-white bg-dark">Оцінки</h1>
+    </center>
+    <p></p>
+    <center>
+        <h2 class="text-success bg-dark">Додати оцінку</h2>
+    </center>
+    <form action="/members/grades/" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="add">
+        <p><b>Учень:</b><input type="text" name="student"></p>
+        <p><b>Предмет:</b><input type="text" name="subject"></p>
+        <p><b>Оцінка:</b><input type="text" name="score"></p>
+        <p><b>День:</b><input type="text" name="date"></p>
+        <button type="submit", class="btn btn-success">Зберегти</button>
+    </form>
+    <p></p>
+    <center>
+        <h2 class="text-danger bg-dark">Видалити оцінку</h2>
+    </center>
+    <form action="/members/grades/" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="delete">
+        <p><b>Учень:</b><input type="text" name="student"></p>
+        <p><b>Предмет:</b><input type="text" name="subject"></p>
+        <p><b>Оцінка:</b><input type="text" name="score"></p>
+        <p><b>День:</b><input type="text" name="date"></p>
+        <button type="submit", class="btn btn-danger">Видалити</button>
+    </form>
+    <p></p>
+    <center>
+        <h2 class="text-warning bg-dark">Оновити дані оцінки</h2>
+    </center>
+    <form action="/members/grades/" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="update">
+        <p><b>Учень:</b><input type="text" name="student"></p>
+        <p><b>Предмет:</b><input type="text" name="subject"></p>
+        <p><b>Оцінка:</b><input type="text" name="old_score"></p>
+        <p><b>День:</b><input type="text" name="date"></p>
+        <p><b>Оновленна оцінка:</b><input type="text" name="new_score"></p>
+        
+        <button type="submit", class="btn btn-warning">Оновити</button>
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+
+</body>
+</html>

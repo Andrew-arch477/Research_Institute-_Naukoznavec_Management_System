@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule_work</title>
+    <link rel="stylesheet" href="{% static 'styles/first.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+</head>
+
+<body class="p-3 mb-2 bg-secondary text-white">
+
+    <center>
+        <h1 class="text-white bg-dark">Розклад</h1>
+    </center>
+
+    <ul>
+        {% for schedule in schedules %}
+            <li>{{schedule}}</li>
+        {% endfor %}
+    </ul>
+    <p></p>
+    <center>
+        <h2 class="text-success bg-dark">Додати урок</h2>
+    </center>
+    <form action="/members/schedules/" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="add">
+        <!-- <p><b>День:</b><input type="text" name="day"></p>
+        <p><b>Час (початку):</b><input type="text" name="time"></p>
+        <p><b>Предмет:</b><input type="text" name="subject"></p>
+        <p><b>Який клас приймає участь:</b><input type="text" name="class_assigned"></p>
+        <p><b>Викладач:</b><input type="text" name="teacher"></p> -->
+        
+        <button type="submit", class="btn btn-success">Зберегти</button>
+    </form>
+    <p></p>
+    <center>
+        <h2 class="text-danger bg-dark">Видалити урок</h2>
+    </center>
+    <form action="/members/schedules/" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="delete">
+        <p><b>День:</b><input type="text" name="day"></p>
+        <p><b>Час (початку):</b><input type="text" name="time"></p>
+        <p><b>Предмет:</b><input type="text" name="subject"></p>
+        <p><b>Який клас приймає участь:</b><input type="text" name="class_assigned"></p>
+        <p><b>Викладач:</b><input type="text" name="teacher"></p>
+        <button type="submit", class="btn btn-danger">Видалити</button>
+    </form>
+    <p></p>
+    <center>
+        <h2 class="text-warning bg-dark">Оновити дані уроку</h2>
+    </center>
+    <form action="/members/schedules/" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="update">
+        <p><b>Поточний день:</b><input type="text" name="old_day"></p>
+        <p><b>Поточний час:</b><input type="text" name="old_time"></p>
+        <p><b>Предмет:</b><input type="text" name="subject"></p>
+        <p><b>Який клас приймає участь:</b><input type="text" name="class_assigned"></p>
+        <p><b>Поточний Викладач:</b><input type="text" name="old_teacher"></p>
+        
+        <p><b>Новий день:</b> <input type="text" name="new_day"></p>
+        <p><b>Новий час:</b> <input type="text" name="new_time"></p>
+        <p><b>Новий викладач:</b> <input type="text" name="new_teacher"></p>
+        
+        <button type="submit", class="btn btn-warning">Оновити</button>
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+
+</body>
+</html>

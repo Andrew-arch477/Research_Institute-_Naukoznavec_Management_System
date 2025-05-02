@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student_work</title>
+    <link rel="stylesheet" href="{% static 'styles/first.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+</head>
+<body class="p-3 mb-2 bg-secondary text-white">
+    <center>
+        <h1 class="text-white bg-dark">Учні нашого навчального закладу</h1>
+    </center>
+
+    <div class = 'row'>
+        {% for student in students %}
+        <div class = "col-6"><h4>{{student}}</h4></div>
+        <div class = "col-3"><a href="{% url 'students_update' student.id %}"><button class="btn btn-warning">Оновити</button></a></div>
+        <div class = "col-3"><a href="{% url 'students_delete' student.id %}"><button class="btn btn-danger">Видалити</button></a></div>
+        {% endfor %}
+    </div>
+
+    <p></p>
+    
+    <center>
+        <h2 class="text-success bg-dark">Додати учня</h2>
+    </center>
+    
+    <form method="POST">
+        {% csrf_token %}
+
+        <div id = 'form-container'>
+            {{ form }}
+            <p></p>
+            <button type="submit", class="btn btn-success">Зберегти</button> 
+        </div>
+    </form>
+
+    <p class="display-7 text-secondary">_</p>
+
+    <center>
+        <a href="/members/home_work"><button type="submit", class="btn btn-primary btn-lg active">Повернутись на головну сторінку</button></a>
+    </center>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+
+</body>
+</html>

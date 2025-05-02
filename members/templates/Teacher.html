@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher_work</title>
+    <link rel="stylesheet" href="{% static 'styles/first.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+</head>
+<body class="p-3 mb-2 bg-secondary text-white">
+    <center>
+        <h1 class="text-white bg-dark">Вчителя нашого навчального закладу</h1>
+    </center>
+
+    <div class = 'row'>
+        {% for teacher in teachers %}
+        <div class = "col-6"><h4>{{teacher}}</h4></div>
+        <div class = "col-3"><a href=""><button class="btn btn-warning">Оновити</button></a></div>
+        <div class = "col-3"><a href=""><button class="btn btn-danger">Видалити</button></a></div>
+        {% endfor %}
+    </div>
+
+    <p></p>
+    <center>
+        <h2 class="text-success bg-dark">Додати вчителя</h2>
+    </center>
+    <form action="/members/teachers/" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="add">
+        <!-- <p><b>Ім'я:</b><input type="text" name="name"></p>
+        <p><b>Прізвище:</b><input type="text" name="surname"></p>
+        <p><b>Вік:</b><input type="number" name="age"></p>
+        <p><b>Предмет який викладає:</b><input type="text" name="subject"></p> -->
+        <div id = 'form-container'>
+            {{ form }}
+            <button type="submit", class="btn btn-success">Зберегти</button> 
+        </div>
+    </form>
+    <p></p>
+    <center>
+        <h2 class="text-danger bg-dark">Видалити вчителя</h2>
+    </center>
+    <form action="/members/teachers/" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="delete">
+        <!-- <p><b>Ім'я:</b><input type="text" name="name"></p>
+        <p><b>Прізвище:</b><input type="text" name="surname"></p>
+        <p><b>Вік:</b><input type="number" name="age"></p>
+        <p><b>Предмет який викладає:</b><input type="text" name="subject"></p> -->
+        <div id = 'form-container'>
+            {{ form }}
+            <button type="submit", class="btn btn-danger">Видалити</button>
+        </div>
+    </form>
+    <p></p>
+    <center>
+        <h2 class="text-warning bg-dark">Оновити дані вчителя</h2>
+    </center>
+    <form action="/members/teachers/" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="update">
+        <p><b>Поточне ім'я:</b><input type="text" name="old_name"></p>
+        <p><b>Поточне прізвище:</b><input type="text" name="old_surname"></p>
+        <p><b>Поточний вік:</b><input type="number" name="old_age"></p>
+        <p><b>Поточний предмет який викладає:</b><input type="text" name="old_subject"></p>
+        
+        <!-- <p><b>Новий ім'я:</b><input type="text" name="new_name"></p>
+        <p><b>Новий прізвище:</b><input type="text" name="new_surname"></p>
+        <p><b>Новий вік:</b><input type="number" name="new_age"></p>
+        <p><b>Новий предмет який викладає:</b><input type="text" name="new_subject"></p> -->
+
+        <div id = 'form-container'>
+            {{ form }}
+            <button type="submit", class="btn btn-warning">Оновити</button>
+        </div>
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+
+</body>
+</html>
